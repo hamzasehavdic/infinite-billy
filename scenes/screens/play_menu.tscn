@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://dutawswto6qsc"]
+
+[ext_resource type="Texture2D" uid="uid://c8lxesnvahhk2" path="res://portrait.jpg" id="1_1q8v2"]
+[ext_resource type="Script" path="res://scenes/screens/play_menu.gd" id="1_yli0r"]
+[ext_resource type="FontFile" uid="uid://coleh00yjo2xv" path="res://graphics/fonts/PixelOperator8.ttf" id="2_wsod3"]
+[ext_resource type="Texture2D" uid="uid://bhfsumlw72x5v" path="res://graphics/player/billy_idle.png" id="3_m42yc"]
+[ext_resource type="Texture2D" uid="uid://towjh00io3v8" path="res://graphics/enemies/enemy_f_idle.png" id="4_k3k3f"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_3ybmd"]
+specular_color = Color(0.847059, 0.831373, 0.831373, 1)
+
+[node name="PlayMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yli0r")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRectBG" type="TextureRect" parent="MarginContainer"]
+self_modulate = Color(0.847059, 0.831373, 0.831373, 1)
+layout_mode = 2
+texture = SubResource("CanvasTexture_3ybmd")
+
+[node name="TextureRectImg" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_1q8v2")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_wsod3")
+theme_override_font_sizes/font_size = 16
+text = "Play"
+icon = ExtResource("3_m42yc")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_wsod3")
+theme_override_font_sizes/font_size = 16
+text = "Quit"
+icon = ExtResource("4_k3k3f")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

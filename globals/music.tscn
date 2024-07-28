@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxpxgxssjtg0h"]
+
+[ext_resource type="AudioStream" uid="uid://vi4x87ak67yw" path="res://audio/fight_chiptune_1.wav" id="1_ywlav"]
+
+[node name="Music" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ywlav")
+volume_db = -10.0
+autoplay = true

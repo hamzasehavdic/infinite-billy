@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu6xgnyreonl0"]
+
+[ext_resource type="Texture2D" uid="uid://dxaua7qwlaack" path="res://graphics/player/player_milk_ball.png" id="1_bycfu"]
+[ext_resource type="Script" path="res://scenes/player/infinite_cup.gd" id="1_chmqj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4pry7"]
+atlas = ExtResource("1_bycfu")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca32v"]
+atlas = ExtResource("1_bycfu")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w2qev"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4pry7")
+}],
+"loop": false,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca32v")
+}],
+"loop": false,
+"name": &"on",
+"speed": 5.0
+}]
+
+[node name="InfiniteCup" type="Node2D"]
+script = ExtResource("1_chmqj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w2qev")
+animation = &"on"
+autoplay = "on"
+metadata/_edit_lock_ = true

@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmhbn4h2yaa62"]
+
+[ext_resource type="PackedScene" uid="uid://b841to43edcj6" path="res://scenes/player/player.tscn" id="1_u4jpe"]
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_v258t"]
+[ext_resource type="PackedScene" uid="uid://bra1aeo0fjw0p" path="res://scenes/player/player_camera.tscn" id="2_3jcg0"]
+[ext_resource type="PackedScene" uid="uid://qyurp66gp86v" path="res://scenes/user interface/ui.tscn" id="2_h1gnp"]
+[ext_resource type="PackedScene" uid="uid://ce7nog4jexetm" path="res://graphics/enemies/enemy_spawn_pod.tscn" id="4_31o0x"]
+
+[sub_resource type="Gradient" id="Gradient_yyrl4"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xec64"]
+gradient = SubResource("Gradient_yyrl4")
+fill = 2
+fill_from = Vector2(0.500611, 0.492063)
+fill_to = Vector2(0.490842, 0.120879)
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_v258t")
+
+[node name="Ground" type="Sprite2D" parent="."]
+z_index = -5
+position = Vector2(240, 158)
+scale = Vector2(18.0654, 15.4932)
+texture = SubResource("GradientTexture2D_xec64")
+
+[node name="SpawnPods" type="Node2D" parent="."]
+
+[node name="EnemySpawnPod0" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(-165, 107)
+
+[node name="EnemySpawnPod1" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(-166, 143)
+
+[node name="EnemySpawnPod2" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(-166, 177)
+
+[node name="EnemySpawnPod3" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(644, 103)
+rotation = 3.14159
+
+[node name="EnemySpawnPod4" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(643, 139)
+rotation = 3.14159
+
+[node name="EnemySpawnPod5" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(643, 173)
+rotation = 3.14159
+
+[node name="EnemySpawnPod6" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(185, -208)
+rotation = 1.5708
+
+[node name="EnemySpawnPod7" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(223, -207)
+rotation = 1.5708
+
+[node name="EnemySpawnPod8" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(262, -208)
+rotation = 1.5708
+
+[node name="EnemySpawnPod9" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(200, 510)
+rotation = 4.71239
+
+[node name="EnemySpawnPod10" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(238, 511)
+rotation = 4.71239
+
+[node name="EnemySpawnPod11" parent="SpawnPods" instance=ExtResource("4_31o0x")]
+position = Vector2(277, 510)
+rotation = 4.71239
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_u4jpe")]
+position = Vector2(237, 150)
+
+[node name="UI" parent="Player" instance=ExtResource("2_h1gnp")]
+
+[node name="PlayerCamera2D" parent="Player" instance=ExtResource("2_3jcg0")]
+zoom = Vector2(0.9, 0.9)
+decay = 2.0
+max_offset = Vector2(2.08165e-12, 2.08165e-12)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-169, -199, 644, -199, 646, 499, -169, 499, -170, -199, -217, 550, 707, 560, 679, -277)
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

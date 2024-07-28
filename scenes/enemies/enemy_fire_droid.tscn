@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0ery1g5qmyc1"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_fire_droid.gd" id="1_vnk07"]
+[ext_resource type="Texture2D" uid="uid://towjh00io3v8" path="res://graphics/enemies/enemy_f_idle.png" id="2_h3fg6"]
+[ext_resource type="AudioStream" uid="uid://bra042wfgf44a" path="res://audio/solid_impact.ogg" id="3_krv01"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6es5"]
+radius = 17.0294
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_betve"]
+radius = 257.031
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeooc"]
+atlas = ExtResource("2_h3fg6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onw5w"]
+atlas = ExtResource("2_h3fg6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpmuf"]
+atlas = ExtResource("2_h3fg6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tbn10"]
+atlas = ExtResource("2_h3fg6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vhw8v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeooc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onw5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpmuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tbn10")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="EnemyFireDroid" type="CharacterBody2D" groups=["Enemies", "Entity"]]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_vnk07")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i6es5")
+debug_color = Color(0.976471, 0, 0.411765, 1)
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_betve")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vhw8v")
+autoplay = "default"
+
+[node name="FireballSpawnPositions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="FireballSpawnPositions"]
+position = Vector2(10, 11)
+
+[node name="Marker2D2" type="Marker2D" parent="FireballSpawnPositions"]
+position = Vector2(-1, 11)
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="FireballTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+
+[node name="HitTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_krv01")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="Timers/FireballTimer" to="." method="_on_fireball_timer_timeout"]
+[connection signal="timeout" from="Timers/HitTimer" to="." method="_on_hit_timer_timeout"]

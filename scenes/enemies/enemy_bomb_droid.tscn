@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgr27fqac78qp"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy_bomb_droid.gd" id="1_iisw0"]
+[ext_resource type="Texture2D" uid="uid://dwo7jkog8i4l2" path="res://graphics/enemies/enemy_b.png" id="1_o8pd7"]
+[ext_resource type="AudioStream" uid="uid://bra042wfgf44a" path="res://audio/solid_impact.ogg" id="2_0n1jj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_evjvb"]
+radius = 20.025
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gm6j"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mxnkd"]
+radius = 217.009
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_15ukn"]
+particle_flag_disable_z = true
+gravity = Vector3(-10, -1, 2.08165e-12)
+orbit_velocity_min = 2.08167e-14
+orbit_velocity_max = 2.08167e-14
+
+[sub_resource type="Gradient" id="Gradient_675mu"]
+offsets = PackedFloat32Array(0, 0.503968, 0.69246, 0.789683)
+colors = PackedColorArray(1, 0.827451, 0, 1, 1, 0.988235, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ufq8"]
+gradient = SubResource("Gradient_675mu")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.498168, 0.496947)
+fill_to = Vector2(1, 1)
+
+[node name="EnemyBombDroid" type="CharacterBody2D" groups=["Enemies", "Entity"]]
+collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_iisw0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_evjvb")
+debug_color = Color(0.976471, 0, 0.411765, 1)
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_4gm6j")
+debug_color = Color(0.658824, 0.517647, 0, 0.419608)
+
+[node name="DetectArea" type="Area2D" parent="."]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+shape = SubResource("CircleShape2D_mxnkd")
+debug_color = Color(0.411765, 0.462745, 1, 0.419608)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-9, 8)
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_15ukn")
+texture = SubResource("GradientTexture2D_4ufq8")
+lifetime = 2.0
+trail_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_o8pd7")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="HitTimer" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_0n1jj")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_entered" from="DetectArea" to="." method="_on_detect_area_body_entered"]
+[connection signal="body_exited" from="DetectArea" to="." method="_on_detect_area_body_exited"]

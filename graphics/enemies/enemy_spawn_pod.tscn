@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://ce7nog4jexetm"]
+
+[ext_resource type="Script" path="res://graphics/enemies/enemy_spawn_pod.gd" id="1_dsy6f"]
+[ext_resource type="Texture2D" uid="uid://4jr43ehra15i" path="res://graphics/enemies/enemy_battery_pod.png" id="1_uiwde"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6tvu"]
+atlas = ExtResource("1_uiwde")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g1r3g"]
+atlas = ExtResource("1_uiwde")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0fwcc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6tvu")
+}],
+"loop": false,
+"name": &"right_charging",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g1r3g")
+}],
+"loop": true,
+"name": &"right_ready",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7vfs"]
+size = Vector2(60, 30)
+
+[node name="EnemySpawnPod" type="Node2D"]
+script = ExtResource("1_dsy6f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0fwcc")
+animation = &"right_charging"
+autoplay = "right_charging"
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_j7vfs")
+metadata/_edit_lock_ = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(49, 0)
