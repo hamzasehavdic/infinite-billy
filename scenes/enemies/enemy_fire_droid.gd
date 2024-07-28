@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const MOVE_SPEED = 30
+const MOVE_SPEED = 40
 
 var player_nearby: bool = false
 var can_fireball: bool = true

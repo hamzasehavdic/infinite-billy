@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 
-const SPEED = 100.0
+const SPEED = 80
 
 var vulnerable: bool = true
 
@@ -75,7 +75,7 @@ func _process(_delta):
 
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and primary_wep.can_action:
 			primary_wep.action(dir)
@@ -104,8 +104,8 @@ func hit():
 		$Timers/HitTimer.start()
 		$HitSound.play()
 	if Globals.player_health <= 0:
-		tween.tween_property(anim_sprite, "self_modulate", Color.BLACK, 0.1)
-		tween.tween_property(anim_sprite, "self_modulate:a", 0, 0.9)
+		tween.tween_property(anim_sprite, "modulate", Color.BLACK, 0.1)
+		tween.tween_property(anim_sprite, "modulate:a", 0, 0.5)
 		await tween.finished
 		queue_free()
 		get_tree().change_scene_to_file('res://scenes/screens/play_menu.tscn')

@@ -21,5 +21,5 @@ func _on_player_health_changed(new_health: int):
 	update_health_bar()
 	
 func update_health_bar() -> void:
-	$StatsControl/MarginContainer/LifeHBoxContainer.remove_child($StatsControl/MarginContainer/LifeHBoxContainer.get_child(0))
+	$StatsControl/LifeHBoxContainer.remove_child($StatsControl/LifeHBoxContainer.get_child(0))
 	

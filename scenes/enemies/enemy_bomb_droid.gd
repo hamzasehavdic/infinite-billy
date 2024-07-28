@@ -30,6 +30,7 @@ func hit():
 
 func detonate() -> void:
 		set_process_input(false)
+		velocity = Vector2.ZERO
 		var explosion = ExplosionScene.instantiate()
 		explosion.global_position = global_position
 		$'../../Projectiles'.add_child(explosion)
@@ -41,6 +42,7 @@ func _on_attack_area_body_entered(body):
 
 
 func _on_detect_area_body_entered(body: Node2D) -> void:
+	$DetonateSound.play()
 	player_nearby = true
 	var dir = global_position.direction_to(body.global_position)
 	scale.x = -1 if dir.x < 0 else 1

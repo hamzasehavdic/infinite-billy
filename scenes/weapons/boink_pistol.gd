@@ -6,7 +6,7 @@ var blue_bullet_scene = preload("res://scenes/projectiles/blue_bullet.tscn")
 
 
 # independent/primitive vars
-@export var cd_duration_sec = 1.0
+@export var cd_duration_sec = 0.5
 var can_action: bool
 
 # dependent/node vars

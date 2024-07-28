@@ -2,7 +2,7 @@ extends Area2D
 
 
 const LIFE_DURATION = 5.0
-@export var speed: int = 100
+@export var speed: int = 140
 @export var dir_vec: Vector2 = Vector2.RIGHT
 
 

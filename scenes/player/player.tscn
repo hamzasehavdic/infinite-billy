@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b841to43edcj6"]
+[gd_scene load_steps=32 format=3 uid="uid://b841to43edcj6"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wcp5d"]
 [ext_resource type="Texture2D" uid="uid://bhfsumlw72x5v" path="res://graphics/player/billy_idle.png" id="2_o8lxb"]
@@ -177,6 +177,9 @@ _data = {
 "test": SubResource("Animation_2nhup")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_s4sgp"]
+polygon = PackedVector2Array(-5, 0, 5, 0, 9, -7, 4, -10, -7, -10, -9, -7)
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 31
 script = ExtResource("1_wcp5d")
@@ -242,5 +245,8 @@ stream = ExtResource("6_nlh15")
 libraries = {
 "": SubResource("AnimationLibrary_5sqlv")
 }
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_s4sgp")
 
 [connection signal="timeout" from="Timers/HitTimer" to="." method="_on_hit_timer_timeout"]

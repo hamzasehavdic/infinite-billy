@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmhbn4h2yaa62"]
+[gd_scene load_steps=9 format=3 uid="uid://bmhbn4h2yaa62"]
 
 [ext_resource type="PackedScene" uid="uid://b841to43edcj6" path="res://scenes/player/player.tscn" id="1_u4jpe"]
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_v258t"]
 [ext_resource type="PackedScene" uid="uid://bra1aeo0fjw0p" path="res://scenes/player/player_camera.tscn" id="2_3jcg0"]
 [ext_resource type="PackedScene" uid="uid://qyurp66gp86v" path="res://scenes/user interface/ui.tscn" id="2_h1gnp"]
 [ext_resource type="PackedScene" uid="uid://ce7nog4jexetm" path="res://graphics/enemies/enemy_spawn_pod.tscn" id="4_31o0x"]
+[ext_resource type="Texture2D" uid="uid://b34xtclrtfqxr" path="res://graphics/lights/textures/circle.png" id="6_xlgmy"]
 
 [sub_resource type="Gradient" id="Gradient_yyrl4"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -76,24 +77,42 @@ rotation = 4.71239
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_u4jpe")]
-position = Vector2(237, 150)
+position = Vector2(235, 252)
+
+[node name="PlayerCamera2D" parent="Player" instance=ExtResource("2_3jcg0")]
+position = Vector2(3, -26)
+offset = Vector2(2.08165e-12, 20)
+zoom = Vector2(0.9, 0.9)
+limit_left = -170
+limit_top = -200
+limit_right = 650
+limit_bottom = 500
+position_smoothing_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="UI" parent="Player" instance=ExtResource("2_h1gnp")]
 
-[node name="PlayerCamera2D" parent="Player" instance=ExtResource("2_3jcg0")]
-zoom = Vector2(0.9, 0.9)
-decay = 2.0
-max_offset = Vector2(2.08165e-12, 2.08165e-12)
-
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 16
 collision_mask = 6
+metadata/_edit_lock_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-169, -199, 644, -199, 646, 499, -169, 499, -170, -199, -217, 550, 707, 560, 679, -277)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(239, 172)
+scale = Vector2(0.957891, 0.780469)
+color = Color(0.239216, 1, 1, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 495
+texture = ExtResource("6_xlgmy")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

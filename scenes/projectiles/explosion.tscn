@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dm7kyml837s1k" path="res://audio/explosion.wav" id="1_703ek"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ydfxm"]
-radius = 29.0
+radius = 20.6774
 
 [sub_resource type="Animation" id="Animation_j2t5v"]
 resource_name = "explode"
@@ -16,10 +16,10 @@ tracks/0/path = NodePath("Polygon2DInner:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(2, 2), Vector2(0.5, 0.5), Vector2(1.5, 1.5), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0.3, 0.3)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -28,10 +28,10 @@ tracks/1/path = NodePath("Polygon2DOuter:scale")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(2, 2), Vector2(1.5, 1.5), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(0.3, 0.3)]
 }
 tracks/2/type = "audio"
 tracks/2/imported = false
@@ -105,6 +105,7 @@ _data = {
 }
 
 [node name="Explosion" type="Node2D"]
+modulate = Color(1, 1, 1, 0)
 top_level = true
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_7whft")
@@ -114,18 +115,19 @@ collision_layer = 16
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D"]
-top_level = true
 shape = SubResource("CircleShape2D_ydfxm")
-debug_color = Color(0.729412, 0.47451, 0, 0.419608)
+debug_color = Color(0.305882, 0.627451, 0, 0.419608)
 
 [node name="Polygon2DOuter" type="Polygon2D" parent="."]
-scale = Vector2(0.6, 0.6)
+rotation = 1.5708
+scale = Vector2(0.3, 0.3)
 color = Color(0.90155, 0.0630586, 0.0375308, 1)
 texture_scale = Vector2(2, 2)
 polygon = PackedVector2Array(0, 4, 4, 12, 3, 1, 14, 1, 4, -2, 12, -14, 0, -6, -4, -10, -4, -6, -13, -6, -6, -2, -13, 13)
 
 [node name="Polygon2DInner" type="Polygon2D" parent="."]
-scale = Vector2(2.5, 2.5)
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
 color = Color(1, 0.666667, 0, 1)
 texture_scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-2, 1, 0, 9, 1, 3, 8, 3, 2, -4, 1, -18, -1, -3, -14, -5)

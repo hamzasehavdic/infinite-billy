@@ -21,21 +21,31 @@ script = ExtResource("1_6nuit")
 
 [node name="StatsControl" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -47.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
 
 [node name="GridContainer" type="GridContainer" parent="StatsControl"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -59.0
-offset_right = 59.0
-offset_bottom = 42.0
-grow_horizontal = 2
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -21.0
+offset_bottom = 21.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
 size_flags_horizontal = 8
 size_flags_vertical = 8
 columns = 2
@@ -84,32 +94,34 @@ theme_override_fonts/font = ExtResource("5_8sgj1")
 theme_override_font_sizes/font_size = 16
 text = "0"
 
-[node name="MarginContainer" type="MarginContainer" parent="StatsControl"]
+[node name="LifeHBoxContainer" type="HBoxContainer" parent="StatsControl"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -32.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -16.0
+offset_right = 52.0
+offset_bottom = 16.0
 grow_horizontal = 2
-grow_vertical = 0
-
-[node name="LifeHBoxContainer" type="HBoxContainer" parent="StatsControl/MarginContainer"]
-layout_mode = 2
+grow_vertical = 2
+scale = Vector2(0.7, 0.7)
 size_flags_horizontal = 4
-size_flags_vertical = 8
+size_flags_vertical = 4
 
-[node name="TextureRect0" type="TextureRect" parent="StatsControl/MarginContainer/LifeHBoxContainer"]
+[node name="TextureRect0" type="TextureRect" parent="StatsControl/LifeHBoxContainer"]
 layout_mode = 2
 texture = SubResource("GradientTexture2D_rfww1")
 stretch_mode = 2
 
-[node name="TextureRect1" type="TextureRect" parent="StatsControl/MarginContainer/LifeHBoxContainer"]
+[node name="TextureRect1" type="TextureRect" parent="StatsControl/LifeHBoxContainer"]
 layout_mode = 2
 texture = SubResource("GradientTexture2D_rfww1")
 stretch_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="StatsControl/MarginContainer/LifeHBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="StatsControl/LifeHBoxContainer"]
 layout_mode = 2
 texture = SubResource("GradientTexture2D_rfww1")
 stretch_mode = 2

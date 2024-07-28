@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgr27fqac78qp"]
+[gd_scene load_steps=12 format=3 uid="uid://bgr27fqac78qp"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy_bomb_droid.gd" id="1_iisw0"]
 [ext_resource type="Texture2D" uid="uid://dwo7jkog8i4l2" path="res://graphics/enemies/enemy_b.png" id="1_o8pd7"]
 [ext_resource type="AudioStream" uid="uid://bra042wfgf44a" path="res://audio/solid_impact.ogg" id="2_0n1jj"]
+[ext_resource type="AudioStream" uid="uid://khc74gdfd6sl" path="res://audio/warning.wav" id="4_kvyhe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_evjvb"]
 radius = 20.025
@@ -30,6 +31,9 @@ height = 8
 fill = 1
 fill_from = Vector2(0.498168, 0.496947)
 fill_to = Vector2(1, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_17p1n"]
+polygon = PackedVector2Array(-0.0787642, 9.86933, 0.0787642, 11.3877, 0.105019, 6.07343, -0.0525095, 3.7959)
 
 [node name="EnemyBombDroid" type="CharacterBody2D" groups=["Enemies", "Entity"]]
 collision_layer = 2
@@ -73,6 +77,13 @@ one_shot = true
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_0n1jj")
+
+[node name="DetonateSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kvyhe")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(114.265, 1.31721)
+occluder = SubResource("OccluderPolygon2D_17p1n")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_entered" from="DetectArea" to="." method="_on_detect_area_body_entered"]
